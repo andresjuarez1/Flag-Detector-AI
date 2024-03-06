@@ -12,17 +12,17 @@ classes = ['Mexico', 'Qatar', 'Georgia', 'Espana', 'Ecuador', 'USA', 'Chile', 'P
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Obtener la imagen del cuerpo de la solicitud
+    
     image_data = request.files['image']
-    # Procesar la imagen
+    
     img = cv2.imdecode(np.fromstring(image_data.read(), np.uint8), cv2.IMREAD_GRAYSCALE)
     img = cv2.resize(img, (64, 64))
     img = np.array(img).reshape(-1, 64, 64, 1)
-    # Realizar la predicción
+    
     prediction = model.predict(img)
     predicted_class = classes[np.argmax(prediction)]
     
-    return jsonify({predicted_class: 'Clase_predicha'})
+    return jsonify({'predicted_class': predicted_class})
 
 if __name__ == '__main__':
     app.run(debug=True)
