@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 const CameraComponent = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const [predictedClass, setPredictedClass] = useState(null); 
+  const [predictedClass, setPredictedClass] = useState(null);
 
 
   const startCamera = async () => {
@@ -33,7 +33,6 @@ const CameraComponent = () => {
       });
       const data = await response.json();
       setPredictedClass(data.predicted_class);
-      alert(`Clase predicha: ${data.predicted_class}`);
       console.log(data);
     } catch (error) {
       console.error('Error sending image to server:', error);
@@ -51,8 +50,9 @@ const CameraComponent = () => {
           <button className='p-4 m-10 text-white font-semibold bg-[#5b5b5b] rounded-md' onClick={startCamera}>Activar Cámara</button>
           <button className='p-4 m-10 text-white font-semibold bg-[#5b5b5b] rounded-md' onClick={takePhoto}>Tomar Foto</button>
         </div>
-        <h1>{predictedClass}</h1>
-        <div className='flex justify-center'>
+
+        <div className='flex flex-col-reverse items-center'>
+          <h1 className='text-white text-2xl font-semibold'>La bandera que se supone es de: {predictedClass}</h1>
           <video ref={videoRef} autoPlay muted style={{ width: '100%', maxWidth: '640px' }}></video>
           <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480"></canvas>
         </div>
