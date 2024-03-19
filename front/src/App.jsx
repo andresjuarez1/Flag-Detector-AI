@@ -4,12 +4,13 @@ const CameraComponent = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [predictedClass, setPredictedClass] = useState(null);
-
+  const [cameraActive, setCameraActive] = useState(false);
 
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
       videoRef.current.srcObject = stream;
+      setCameraActive(true); // Establece la cámara como activa
     } catch (err) {
       console.error('Error accessing camera:', err);
     }
@@ -39,25 +40,29 @@ const CameraComponent = () => {
     }
   };
 
-
-
-
   return (
-    <div className='bg-[#2c2c2c] h-[727px]'>
-      <div>
-        <h1 className='text-center text-white font-semibold text-4xl'>FLAG DETECTOR</h1>
-        <div className='flex justify-center'>
-          <button className='p-4 m-10 text-white font-semibold bg-[#5b5b5b] rounded-md' onClick={startCamera}>Activar Cámara</button>
-          <button className='p-4 m-10 text-white font-semibold bg-[#5b5b5b] rounded-md' onClick={takePhoto}>Tomar Foto</button>
-        </div>
+    <>
+      <div className='bg-[#181818] w-full h-[727px]'>
+        <div className='flex flex-col items-center'>
 
-        <div className='flex flex-col-reverse items-center'>
-          <h1 className='text-white text-2xl font-semibold'>La bandera que se supone es de: {predictedClass}</h1>
-          <video ref={videoRef} autoPlay muted style={{ width: '100%', maxWidth: '640px' }}></video>
+          <div className='bg-[#222222] w-full'>
+            <h1 className='text-center text-white font-semibold text-4xl mt-4 mb-4'>FLAG DETECTOR</h1>
+          </div>
+
+          <h1 className='text-white text-2xl font-semibold mb-5 mt-4'>La bandera que se supone es de: {predictedClass}</h1>
+          {!cameraActive && (
+            <button className='p-3 mx-10 text-white font-semibold bg-[#474747] rounded-lg hover:bg-[#3e3e3e]' onClick={startCamera}>Activar Cámara</button>
+          )}
+          <video ref={videoRef} autoPlay muted style={{ width: '100%', maxWidth: '640px', display: cameraActive ? 'block' : 'none' }}></video>
           <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480"></canvas>
+          {cameraActive && (
+            <div className='flex justify-center'>
+              <button className='p-3 mt-7 mx-10 text-white font-semibold bg-[#474747] rounded-lg hover:bg-[#3e3e3e]' onClick={takePhoto}>Tomar Foto</button>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
