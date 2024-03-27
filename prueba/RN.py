@@ -49,7 +49,7 @@ model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-history = model.fit(X_train,y_train, batch_size=40, epochs=10, verbose=1, validation_data=(X_test,y_test))
+history = model.fit(X_train,y_train, batch_size=40, epochs=20, verbose=1, validation_data=(X_test,y_test))
 model.save('modelo.h5')
 
 if not os.path.exists('graficas'):
