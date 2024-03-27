@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
  
 entrenamiento/
-modelo.h5
+*.h5
