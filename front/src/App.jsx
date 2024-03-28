@@ -48,7 +48,7 @@ const CameraComponent = () => {
 
   return (
     <>
-      <div className='bg-[#181818] h-[720px]'>
+      <div className='bg-[#181818] h-[689px]'>
         <div className='flex flex-col justify-center'>
           <h1 className='text-center text-white font-semibold text-6xl mt-6'>FLAG DETECTOR</h1>
 
@@ -59,22 +59,27 @@ const CameraComponent = () => {
           </div>
         </div>
 
-        <div className='grid grid-cols-2 mt-10'>
+        <div className='grid grid-cols-2 mt-9'>
           <div>
-            <video ref={videoRef} autoPlay muted style={{ width: '100%', maxWidth: '640px', display: cameraActive ? 'block' : 'none' }} className='ml-5'></video>
+            <video ref={videoRef} autoPlay muted style={{ width: '100%', maxWidth: '640px', display: cameraActive ? 'block' : 'none' }} className='ml-5 rounded-3xl'></video>
             <canvas ref={canvasRef} style={{ display: 'none' }} width="640" height="480" className='ml-10'></canvas>
           </div>
 
-          <div className='mx-20 ml-[15px] mt-20'>
-            <h1 className='text-red-600 text-8xl font-semibold mb-10 text-center'>{predictedClass}</h1>
-            {historyText && <h1 className='text-white text-lg text-center'>{historyText}</h1>}
-          </div>
 
+          {cameraActive && (
+            <div className='mx-20 ml-[15px] bg-[#2c2c2c] rounded-3xl p-5'>
+
+              {!historyText && (
+                <h1 className='text-[#d75858] text-6xl font-semibold text-center mt-[155px]'>ESPERANDO BANDERA</h1>
+              )}
+              <h1 className='text-[#d75858] text-8xl font-semibold mb-8 text-center mt-24'>{predictedClass}</h1>
+              {historyText && <h1 className='text-white text-xl font-medium text-center'>{historyText}</h1>}
+            </div>
+          )}
         </div>
-
         {cameraActive && (
           <div className='flex justify-center'>
-            <button className='p-3 mt-8 mx-10 w-[150px] text-white font-semibold bg-[#474747] rounded-lg hover:bg-[#3e3e3e]' onClick={takePhoto}>Tomar Foto</button>
+            <button className='p-3 mt-6 mx-10 w-[150px] text-white font-semibold bg-[#474747] rounded-lg hover:bg-[#3e3e3e]' onClick={takePhoto}>Tomar Foto</button>
           </div>
         )}
       </div>
