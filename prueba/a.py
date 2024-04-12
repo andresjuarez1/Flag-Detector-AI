@@ -21,7 +21,7 @@ history_texts = {
     'Peru': 'La bandera del Perú consta de tres franjas verticales: roja (izquierda), blanca (centro) y roja (derecha), con el escudo de armas en el centro de la franja blanca. El rojo simboliza la sangre derramada por la patria y el sacrificio de los héroes, el blanco representa la paz y la pureza, y el escudo de armas representa la historia y la identidad del país.',
     'Tunez': 'La bandera de Túnez es de color rojo con un círculo blanco en el centro. El rojo simboliza la sangre derramada durante la lucha por la independencia, y el círculo blanco representa la esperanza y la paz.',
     'Eslovaquia': 'La bandera de Eslovaquia consta de tres franjas horizontales: blanca (arriba), azul (centro) y roja (abajo). El azul representa la libertad, la verdad y la lealtad, el blanco simboliza la unidad y la paz, y el rojo representa el coraje y la valentía.'
-}
+}   
 
 @app.route('/predict', methods=['POST'])
 def predict():
